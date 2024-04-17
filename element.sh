@@ -11,5 +11,8 @@ if [[ -z $1 ]]
 # check if argument is a number
 elif [[ $1 =~ ^[0-9]+$ ]]
   then
-    echo This is a number
+    # get info from database
+    ELEMENT_INFO=$($PSQL "SELECT atomic_number, name, symbol, atomic_mass, melting_point_celsius, boiling_point_celsius FROM elements INNER JOIN properties USING(atomic_number) WHERE atomic_number = $1")
+
+    # if it doesn't exist
 fi
